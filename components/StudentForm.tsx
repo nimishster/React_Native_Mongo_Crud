@@ -4,14 +4,16 @@ import { View, TextInput, Button, StyleSheet, Alert } from 'react-native';
 type Props = {
   stu_name: string;
   city: string;
+  marks: number;
   setStuName: (text: string) => void;
   setCity: (text: string) => void;
+  setMarks: (text: number) => void;
   handleSubmit: () => void;
   editingId: string | null;
 };
 
 const StudentForm: React.FC<Props> = ({
-  stu_name, city, setStuName, setCity, handleSubmit, editingId,
+  stu_name, city, marks, setStuName, setCity, setMarks, handleSubmit, editingId,
 }) => {
   return (
     <View>
@@ -26,6 +28,12 @@ const StudentForm: React.FC<Props> = ({
         placeholder="City"
         value={city}
         onChangeText={setCity}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Marks"
+        value={marks.toString()}
+        onChangeText={(text) => setMarks(Number(text))}
       />
       <Button title={editingId ? 'Update' : 'Add'} onPress={handleSubmit} />
     </View>

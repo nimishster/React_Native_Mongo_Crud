@@ -1,21 +1,17 @@
 // components/StudentViewer.tsx
 import React,{useEffect} from 'react';
-import { Text,View, FlatList, Button, StyleSheet } from 'react-native';
+import { Text,View, FlatList, StyleSheet } from 'react-native';
 
 type Student = {
-  _id: string;
-  stu_name: string;
+  totalMarks: number;
   city: string;
-  marks: number;
 };
 
 type Props = {
   students: Student[];
-  onEdit: (student: Student) => void;
-  onDelete: (id: string) => void;
 };
 
-const StudentViewer: React.FC<Props> = ({ students, onEdit, onDelete }) => {
+const SumViewer: React.FC<Props> = ({ students }) => {
    useEffect(() => {
       console.log("dataum : "+JSON.stringify(students));
     }, [students]);
@@ -23,14 +19,10 @@ const StudentViewer: React.FC<Props> = ({ students, onEdit, onDelete }) => {
   return (
     <FlatList
       data={students}
-      keyExtractor={(item) => String(item._id)}
+      keyExtractor={(item) => String(item.totalMarks)}
       renderItem={({ item }) => (
         <View style={styles.itemm}>
-          <Text>{item.stu_name} | {item.city} | {item.marks.toString()}</Text>
-          <View style={styles.btnGroup}>
-            <Button title="Edit" onPress={() => onEdit(item)} />
-            <Button title="Delete" onPress={() => onDelete(item._id)} />
-          </View>
+          <Text>{item.city} | {item.totalMarks.toString()}</Text>
         </View>
       )}
     />
@@ -51,4 +43,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StudentViewer;
+export default SumViewer;
